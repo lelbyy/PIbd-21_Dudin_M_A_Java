@@ -4,10 +4,15 @@ import java.awt.*;
 public class MyPanel extends JPanel {
 
     private Fighter fighter;
+    private Plane plane;
 
     public void paintComponent(Graphics g) {
         if (fighter != null){
-            fighter.draw(g);
+            fighter.DrawPlane(g);
+        }else {
+            if (plane != null) {
+                plane.DrawPlane(g);
+            }
         }
     }
 
@@ -15,7 +20,17 @@ public class MyPanel extends JPanel {
         return fighter;
     }
 
-    public void setPlane(Fighter fighter) {
+    public void setFighter(Fighter fighter) {
         this.fighter = fighter;
+        this.plane = null;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+        this.fighter = null;
     }
 }
