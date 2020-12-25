@@ -2,15 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HangarPanel extends JPanel {
-    private final Hangar<Plane, IRocketsForm> hangar;
+    private final HangarCollection hangarCollection;
+    private String selectedItem = null;
 
+    @Override
     public void paint(Graphics g) {
-        if (hangar != null) {
-            hangar.Draw(g);
+        if (selectedItem != null) {
+            if (hangarCollection != null) {
+                hangarCollection.get(selectedItem).Draw(g);
+            }
         }
     }
 
-    public HangarPanel(Hangar<Plane, IRocketsForm> hangar) {
-        this.hangar = hangar;
+    public void setSelectedItem(String selectedItem) {
+        this.selectedItem = selectedItem;
+    }
+
+    public HangarPanel(HangarCollection hangarCollection) {
+        this.hangarCollection = hangarCollection;
     }
 }

@@ -54,15 +54,16 @@ public class Fighter extends Plane{
 
     @Override
     public void DrawPlane(Graphics g) {
-        if (nose)
-        {
-            g.setColor(dopColor);
-            g.drawLine(_startPosX, _startPosY + 50, _startPosX -10, _startPosY + 50);
-        }
 
         if (planeRockets)
         {
             rocketsForm.draw(g, _startPosX, _startPosY);
+        }
+
+        if (nose)
+        {
+            g.setColor(dopColor);
+            g.drawLine(_startPosX, _startPosY + 50, _startPosX -10, _startPosY + 50);
         }
 
         super.DrawPlane(g);
