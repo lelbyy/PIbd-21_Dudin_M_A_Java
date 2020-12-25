@@ -4,7 +4,6 @@ public class LittleRockets implements IRocketsForm {
 
     private EnumerationOfRockets rockets;
     private Color dopColor;
-
     public LittleRockets(int number, Color dopColor) {
         setDigit(number);
         this.dopColor = dopColor;
