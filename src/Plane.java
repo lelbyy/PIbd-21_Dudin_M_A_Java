@@ -2,9 +2,9 @@ import java.awt.*;
 
 public class Plane extends Vehicle {
 
-    protected int planeWidth = 180;
+    protected int planeWidth = 200;
 
-    protected int planeHeight = 100;
+    protected int planeHeight = 140;
 
     public Plane(int maxSpeed, float weight, Color mainColor) {
         MaxSpeed = maxSpeed;
@@ -23,6 +23,7 @@ public class Plane extends Vehicle {
     @Override
     public void MovePlane(Direction direction) {
         int boarderNumber = 10;
+        int boarderUp =20;
         int step = (int) (MaxSpeed * 1000 / Weight);
         switch (direction) {
             case Up:

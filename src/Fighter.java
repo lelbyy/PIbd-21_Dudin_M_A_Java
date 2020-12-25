@@ -8,7 +8,7 @@ public class Fighter extends Plane{
     private boolean nose;
     public Fighter(int maxSpeed, float weight, Color mainColor, Color dopColor,
                    boolean planeRockets, boolean nose,int rockets, String rocketsForm) {
-        super(maxSpeed, weight, mainColor, 180, 100);
+        super(maxSpeed, weight, mainColor, 200, 140);
         this.dopColor = dopColor;
         this.planeRockets = planeRockets;
         this.nose = nose;
@@ -57,7 +57,7 @@ public class Fighter extends Plane{
         if (nose)
         {
             g.setColor(dopColor);
-            g.drawLine(_startPosX, _startPosY + 50, _startPosX -30, _startPosY + 50);
+            g.drawLine(_startPosX, _startPosY + 50, _startPosX -10, _startPosY + 50);
         }
 
         if (planeRockets)
