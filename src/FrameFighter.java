@@ -2,15 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrameFighter {
-    private final JFrame frame;
-    private MyPanel myPanel;
+    private final JDialog frame;
+    private GamePanel gamePanel;
     private JComboBox rockets;
     private JComboBox rocketsForm;
+    public void setPlane(ITransport plane) {
+        plane.SetPosition((int) (10 + Math.random() * 90), (int) (100 + Math.random() * 100), frame.getWidth(), frame.getHeight());
+        gamePanel.setPlane(plane);
+        frame.repaint();
+    }
 
     public FrameFighter() {
-        frame = new JFrame("Истребитель");
-        frame.setSize(910, 510);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame = new JDialog();
+        frame.setSize(910, 500);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
 
@@ -20,7 +25,7 @@ public class FrameFighter {
         Icon down = new ImageIcon("resources\\arrowDown.png");
 
         JButton btnCreatePlane = new JButton("Создать самолет");
-        JButton btnCreateFighter = new JButton("Создать истребитель");
+        JButton btnCreateFighter = new JButton("Создать бомбардировщик");
 
         JButton btnUp = new JButton(up);
         btnUp.setName("up");
@@ -60,61 +65,40 @@ public class FrameFighter {
         frame.getContentPane().add(rockets);
         rockets.setBounds(10, 45, 90, 30);
 
-    }
-
-    public void addMyPanel(MyPanel panel) {
-        myPanel = panel;
-        frame.getContentPane().add(myPanel);
-        myPanel.setBounds(0, 0, 900, 500);
+        gamePanel = new GamePanel();
+        frame.getContentPane().add(gamePanel);
+        gamePanel.setBounds(0, 0, 900, 500);
         frame.repaint();
     }
 
     private void setDirection(JButton button) {
         String name = button.getName();
-        if (myPanel.getFighter() != null) {
             switch (name) {
                 case "up":
-                    myPanel.getFighter().MovePlane(Direction.Up);
+                    gamePanel.getPlane().MovePlane(Direction.Up);
                     break;
                 case "down":
-                    myPanel.getFighter().MovePlane(Direction.Down);
+                    gamePanel.getPlane().MovePlane(Direction.Down);
                     break;
                 case "left":
-                    myPanel.getFighter().MovePlane(Direction.Left);
+                    gamePanel.getPlane().MovePlane(Direction.Left);
                     break;
                 case "right":
-                    myPanel.getFighter().MovePlane(Direction.Right);
+                    gamePanel.getPlane().MovePlane(Direction.Right);
                     break;
             }
-        } else {
-            switch (name) {
-                case "up":
-                    myPanel.getPlane().MovePlane(Direction.Up);
-                    break;
-                case "down":
-                    myPanel.getPlane().MovePlane(Direction.Down);
-                    break;
-                case "left":
-                    myPanel.getPlane().MovePlane(Direction.Left);
-                    break;
-                case "right":
-                    myPanel.getPlane().MovePlane(Direction.Right);
-                    break;
-            }
-        }
         frame.repaint();
-
     }
 
     private void setPlane() {
-        myPanel.setPlane(new Plane(100, 1400, Color.GRAY));
-        myPanel.getPlane().setPosition(40, 70, 900, 500);
+        gamePanel.setPlane(new Plane(100, 1400, Color.GRAY));
+        gamePanel.getPlane().SetPosition(40, 70, 900, 500);
         frame.repaint();
     }
 
     private void setFighter() {
-        myPanel.setFighter(new Fighter(100, 1400, Color.GRAY, Color.RED, true, true, rockets.getSelectedIndex(), rocketsForm.getSelectedItem().toString()));
-        myPanel.getFighter().setPosition(40, 70, 900, 500);
+        gamePanel.setPlane(new Fighter(100, 1400, Color.GRAY, Color.RED, true, true, rockets.getSelectedIndex(), rocketsForm.getSelectedItem().toString()));
+        gamePanel.getPlane().SetPosition(40, 70, 900, 500);
         frame.repaint();
     }
 }
